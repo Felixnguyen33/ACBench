@@ -2,6 +2,7 @@
 
 MODEL=$1
 DTYPE=$2
+QUANT=$3
 
 tasks=(wikihow toolbench toolalpaca lumos alfworld webshop os)
 if [ ${MODEL} == "llama3.1" ]; then
@@ -11,15 +12,14 @@ elif [ ${MODEL} == "mistral_7b" ]; then
 elif [ ${MODEL} == "qwen2_7b" ]; then
     model_name=/data2/share/Qwen2/Qwen2-7B-Instruct
 fi
+
 for task in ${tasks[@]}; do
-    CUDA_VISIBLE_DEVICES=5,6 python node_eval.py \
-        --task eval_workflow \
+    python node_eval.py \
+        --task gen_workflow \
         --model_name ${model_name} \
         --gold_path ./gold_traj/${task}/graph_eval.json \
-        --pred_path ./pred_traj/pred_traj_${MODEL}_${DTYPE}/${task}/${model_name}/graph_eval_two_shot.json\
-        --eval_model all-mpnet-base-v2 \
-        --eval_output ./eval_result/${MODEL}_${DTYPE}/${model_name}_${task}_graph_eval_two_shot.json \
-        --eval_type node \
+        --pred_path ./pred_traj/${MODEL}_${DTYPE}/${task}/${model_name}/graph_eval_two_shot.json\
         --task_type ${task} \
-        --few_shot 
+        --few_shot \
+        --quantization ${QUANT} 
 done
