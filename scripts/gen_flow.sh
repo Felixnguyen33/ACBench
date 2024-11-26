@@ -15,7 +15,7 @@ tasks=(os)
 MODEL_NAME=$(basename $MODEL)
 
 for task in ${tasks[@]}; do
-    python src/node_eval.py \
+    python benchtools/node_eval.py \
         --task gen_workflow \
         --model_name ${MODEL} \
         --gold_path ./data/gold_traj/${task}/graph_eval.json \

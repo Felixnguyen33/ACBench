@@ -151,6 +151,12 @@ if __name__ == "__main__":
         {"role": "user", "content": "Why is the sky blue?"},
     ]
     
-    model = VllmOfflineModel()
+    model = VllmOfflineModel(
+        model_path="/data2/share/llama3.2/Llama-3.2-1B-Instruct-W8A8-gptq",
+        # quantization="awq",
+        device="cuda"
+    )
     response = model.generate(messages)
+    print('===================')
     print(response)
+    print('===================')

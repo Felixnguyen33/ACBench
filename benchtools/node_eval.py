@@ -5,7 +5,7 @@ import os
 import re
 from tqdm import tqdm
 
-from benchtools.llm.localLLM import VllmLocalLLM, VllmOfflineLLM
+from benchtools.llm.localLLM import VllmLocalLLM, VllmOfflineModel
 
 from benchtools.evaluator.graph_evaluator import t_eval_graph, t_eval_nodes
 from benchtools.prompts.eval_prompt import two_shot_example as example
