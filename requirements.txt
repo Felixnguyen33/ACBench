@@ -1,6 +1,7 @@
 sentence_transformers
 openai
 retry
-itertools
 networkx
-re
+vllm
+autoawq
+llmcompressor

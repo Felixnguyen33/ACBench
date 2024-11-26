@@ -1,12 +1,14 @@
 import json
-from LLM.localLLM import VllmLocalLLM, VllmOfflineLLM
 from typing import List
 import argparse
 import os
 import re
 from tqdm import tqdm
-from evaluator.graph_evaluator import t_eval_graph, t_eval_nodes
-from prompts.eval_prompt import two_shot_example as example
+
+from benchtools.llm.localLLM import VllmLocalLLM, VllmOfflineLLM
+
+from benchtools.evaluator.graph_evaluator import t_eval_graph, t_eval_nodes
+from benchtools.prompts.eval_prompt import two_shot_example as example
 
 
 def workflow_to_node_list(workflow: str) -> List[str]:
@@ -98,6 +100,18 @@ def gen_workflow(
     task_type: str,
     args: argparse.Namespace,
 ):
+    # Initialize model once outside the loop
+    model = VllmOfflineModel(
+        model_path=args.model_name,
+        temperature=args.temperature,
+        top_p=args.top_p,
+        max_tokens=args.max_tokens,
+        quantization=args.quantization,
+        dtype=args.dtype,
+        device=args.device,
+        tensor_parallel_size=args.tensor_parallel_size
+    )
+
     with open(gold_path, "r") as f:
         eval_data = json.load(f)
     if os.path.exists(pred_path):
@@ -108,27 +122,15 @@ def gen_workflow(
             workflow_list = preded_datas
     else:
         pred_dir = "/".join(pred_path.split("/")[:-1])
-
         if not os.path.exists(pred_dir):
             os.makedirs(pred_dir)
-
         workflow_list = []
-    workflow_list = []
+
     with tqdm(total=len(eval_data)) as pbar:
         for data in eval_data:
             messages = build_message(data["conversations"], few_shot, task_type)
-            # print(messages)
-            plan = VllmOfflineLLM(
-                messages=messages,
-                model=args.model_name,
-                temperature=args.temperature,
-                top_p=args.top_p,
-                max_tokens=args.max_tokens,
-                quantization=args.quantization,
-                dtype=args.dtype,
-                device=args.device,
-                tensor_parallel_size=args.tensor_parallel_size,
-            )
+            # Use the model.generate method instead of VllmOfflineLLM
+            plan = model.generate(messages)
             workflow_list.append({"query": data, "workflow": plan})
             pbar.update(1)
             print(plan)
