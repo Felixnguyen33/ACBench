@@ -106,7 +106,7 @@ def gen_workflow(
         temperature=args.temperature,
         top_p=args.top_p,
         max_tokens=args.max_tokens,
-        quantization=args.quantization,
+        # quantization=args.quantization,
         dtype=args.dtype,
         device=args.device,
         tensor_parallel_size=args.tensor_parallel_size
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--eval_type", choices=["node", "graph"], default="node")
     parser.add_argument("--few_shot", action="store_true")
-    parser.add_argument("--temperature", type=float, default=0.8)
+    parser.add_argument("--temperature", type=float, default=0)
     parser.add_argument("--top_p", type=float, default=0.95)
     parser.add_argument("--max_tokens", type=int, default=1024)
     parser.add_argument("--quantization", type=str, default=None)

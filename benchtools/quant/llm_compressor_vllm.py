@@ -43,7 +43,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, default="meta-llama/Meta-Llama-3-8B-Instruct")
-    parser.add_argument("--num_calibration_samples", type=int, default=4096)
+    parser.add_argument("--num_calibration_samples", type=int, default=1024)
     parser.add_argument("--max_sequence_length", type=int, default=2048)
     parser.add_argument("--quant_method", nargs="+", choices=["smoothquant", "gptq"], default=["smoothquant", "gptq"])
     parser.add_argument("--smoothing_strength", type=float, default=0.8)

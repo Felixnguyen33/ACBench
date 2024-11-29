@@ -56,10 +56,10 @@ class VllmOfflineModel:
     def __init__(
         self,
         model_path: str = "/data2/share/llama3.1/llama-3.1-8B-Instruct",
-        temperature: float = 0.8,
+        temperature: float = 0,
         top_p: float = 0.95,
         max_tokens: int = 1024,
-        quantization: Union[str, None] = None,
+        # quantization: Union[str, None] = None,
         dtype: Union[str, None] = None,
         device: str = "cuda",
         tensor_parallel_size: int = 1
@@ -81,20 +81,22 @@ class VllmOfflineModel:
         self.temperature = temperature
         self.top_p = top_p
         self.max_tokens = max_tokens
-        self.quantization = quantization
+        # self.quantization = quantization
         self.dtype = dtype
         self.device = device
         self.tensor_parallel_size = tensor_parallel_size
         
         # Initialize the LLM
-        if self.quantization == "neuron_quant":
-            self._set_neuron_environment()
+        # if self.quantization == "neuron_quant":
+        #     self._set_neuron_environment()
         
         self.llm = self._create_llm()
         self.sampling_params = SamplingParams(
             temperature=self.temperature,
             top_p=self.top_p,
-            max_tokens=self.max_tokens
+            max_tokens=self.max_tokens,
+            stop_token_ids=[128009],
+            stop=["END", "---", "\n\n"],
         )
 
     def _set_neuron_environment(self) -> None:
@@ -111,7 +113,7 @@ class VllmOfflineModel:
             max_model_len=2048,
             block_size=2048,
             device=self.device,
-            quantization=self.quantization,
+            # quantization=self.quantization,
             tensor_parallel_size=self.tensor_parallel_size
         )
 
@@ -147,12 +149,13 @@ class VllmOfflineModel:
 if __name__ == "__main__":
     # Example usage
     messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Why is the sky blue?"},
+        {"role": "system", "content": "You are a helpful assistant. Please answer 'END' when you are done."},
+        {"role": "user", "content": "How to make a computer from sand?"},
     ]
     
     model = VllmOfflineModel(
-        model_path="/data2/share/llama3.2/Llama-3.2-1B-Instruct-W8A8-gptq",
+        model_path="/data2/share/llama3.1/llama-3.1-8B-Instruct-awq-w4-g128-zp",
+        # -awq-w4-g128-zp",
         # quantization="awq",
         device="cuda"
     )
