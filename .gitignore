@@ -2,6 +2,6 @@
 *.json
 *.pyc
 __pycache__/*
-benchtools.egg-info/*
 *.log
 *.npy
+agentbench.egg-info/*
