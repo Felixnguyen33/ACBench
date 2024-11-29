@@ -1,0 +1,12 @@
+[submodule "thirdparty/thirdparty/qllm-eval"]
+	path = thirdparty/thirdparty/qllm-eval
+	url = https://github.com/thu-nics/qllm-eval.git
+[submodule "thirdparty/qllm-eval"]
+	path = thirdparty/qllm-eval
+	url = https://github.com/thu-nics/qllm-eval.git
+[submodule "thirdparty/opencompass"]
+	path = thirdparty/opencompass
+	url = https://github.com/open-compass/opencompass.git
+[submodule "thirdparty/toolbench"]
+	path = thirdparty/toolbench
+	url = https://github.com/open-compass/T-Eval.git

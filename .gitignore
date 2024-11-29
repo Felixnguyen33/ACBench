@@ -4,3 +4,4 @@
 __pycache__/*
 benchtools.egg-info/*
 *.log
+*.npy
