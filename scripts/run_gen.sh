@@ -46,7 +46,7 @@ function generate_log_name() {
     local quant=$2
     local temp=$3
     local current_date=$(date +%Y%m%d)
-    echo "GENFLOW-${model}-${quant}-t${temp}-${current_date}"
+    echo "GENFLOW-${model}-${quant}-t${temp}-${current_date}-llmc"
 }
 
 function run_genflow() {
