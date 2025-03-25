@@ -5,3 +5,5 @@ __pycache__/*
 *.log
 *.npy
 agentbench.egg-info/*
+*.png
+*.jsonl

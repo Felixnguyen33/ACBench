@@ -62,7 +62,8 @@ class VllmOfflineModel:
         # quantization: Union[str, None] = None,
         dtype: Union[str, None] = None,
         device: str = "cuda",
-        tensor_parallel_size: int = 1
+        tensor_parallel_size: int = 1,
+        block_size=None,
     ):
         """
         Initialize the VllmOfflineModel with the specified parameters.
@@ -84,7 +85,12 @@ class VllmOfflineModel:
         # self.quantization = quantization
         self.dtype = dtype
         self.device = device
-        self.tensor_parallel_size = tensor_parallel_size
+        
+        # Calculate tensor parallel size from CUDA_VISIBLE_DEVICES if not explicitly set
+        if tensor_parallel_size == 1 and "CUDA_VISIBLE_DEVICES" in os.environ:
+            self.tensor_parallel_size = len(os.environ["CUDA_VISIBLE_DEVICES"].split(","))
+        else:
+            self.tensor_parallel_size = tensor_parallel_size
         
         # Initialize the LLM
         # if self.quantization == "neuron_quant":
@@ -109,9 +115,9 @@ class VllmOfflineModel:
         """Creates and returns an LLM instance with the specified parameters."""
         return LLM(
             model=self.model_path,
-            max_num_seqs=1,
-            max_model_len=2048,
-            block_size=2048,
+            trust_remote_code=True,
+            # max_num_seqs=1,
+            # max_model_len=2048,
             device=self.device,
             # quantization=self.quantization,
             tensor_parallel_size=self.tensor_parallel_size

@@ -94,6 +94,15 @@ for task in ${tasks[@]}; do
 done
 ```
 
+| Benchmark       | Description         |
+| --------------- | ------------------- |
+| KVCache-Factory | 大海捞针 + RULER     |
+| LongBenchv1     | 长文本测评           |
+| LongGenBench    | 长文本数学题         |
+| toolbench       | From T-eval         |
+| Agentbench      | WorfBench           |
+
+
 
 <!-- ## 🎉Contributors
 
@@ -101,3 +110,4 @@ done
   <img src="https://contrib.rocks/image?repo=zjunlp/WorFBench" /></a>
 
 We will offer long-term maintenance to fix bugs and solve issues. So if you have any problems, please put issues to us. -->
+

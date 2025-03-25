@@ -1,17 +1,26 @@
 
+# pruning algo
+# sparsegpt, wanda, magnitude 
+# pruning setting
+# 2:4 50% 
 
-# autoawq 
+# MODELS - internlm-2.5 7b 
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/magnitude/internlm-2.5-7b-chat-magnitude-2-4-0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/sparsegpt/internlm-2.5-7b-chat-sparsegpt-2-4-0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/wanda/internlm-2.5-7b-chat-wanda-2-4-0.5
 
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/magnitude/internlm-2.5-7b-chat-magnitude-un0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/sparsegpt/internlm-2.5-7b-chat-sparsegpt-un0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/wanda/internlm-2.5-7b-chat-wanda-un0.5
 
-# MODELS
-# /data2/share/llama3.2/Llama-3.2-1B-Instruct
-# /data2/share/llama3.1/llama-3.1-8B-Instruct
-# /data2/share/mistral-7B/Mistral-7B-Instruct-v0.3
-# /data2/share/Qwen2.5/Qwen2.5-7B-Instruct
+# MODELS - qwen-2.5 7b
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/magnitude/qwen-2.5-7b-chat-magnitude-2-4-0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/sparsegpt/qwen-2.5-7b-chat-sparsegpt-2-4-0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5
 
-# QUANT_METHODS
-# smoothquant
-# gptq
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/magnitude/qwen-2.5-7b-chat-magnitude-un0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/sparsegpt/qwen-2.5-7b-chat-sparsegpt-un0.5
+# /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5
 
 
 # version: gemm,marlin,gemv;gemv_fast
@@ -52,11 +61,11 @@
 
 # tail -f ./logs/mistral-7B-gptq.log
 
-CUDA_VISIBLE_DEVICES=5 python agentbench/quant/llm_compressor_vllm.py \
-    --model_path /data2/share/Qwen2.5/Qwen2.5-7B-Instruct \
-    --quant_method gptq > ./logs/Qwen2.5-7B-gptq.log &
+# CUDA_VISIBLE_DEVICES=5 python agentbench/quant/llm_compressor_vllm.py \
+#     --model_path /data2/share/Qwen2.5/Qwen2.5-7B-Instruct \
+#     --quant_method gptq > ./logs/Qwen2.5-7B-gptq.log &
 
-tail -f ./logs/Qwen2.5-7B-gptq.log
+# tail -f ./logs/Qwen2.5-7B-gptq.log
 
 # CUDA_VISIBLE_DEVICES=3 python agentbench/quant/llm_compressor_vllm.py \
 #     --model_path /data2/share/Qwen2.5/Qwen2.5-7B-Instruct \

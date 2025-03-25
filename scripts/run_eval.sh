@@ -21,7 +21,7 @@ AVA_CUDA_DEVICES=(0 1 2 3 4)
 
 # MODEL+QUANT=qwen2.5+gptq/smooth/awq
 # ROOT_DIR=/data2/share/Qwen2.5 
-# gptq: Qwen2.5-7B-Instruct-W8A8-gptq 
+# gptq: Qwen2.5-7B-Instruct-GPTQ-w4a16 
 # smooth: Qwen2.5-7B-Instruct-W8A8-smooth0.8
 # awq: Qwen2.5-7B-Instruct-awq-w4-g128-zp
 
@@ -34,12 +34,13 @@ AVA_CUDA_DEVICES=(0 1 2 3 4)
 
 AVA_CUDA_DEVICES=(0 1 2 3 4)
 declare -A MODEL_TO_DEVICE=(
-    ["llama3.1"]="1"
-    ["qwen2.5"]="2"
-    ["mistral0.3"]="3"
+    ["llama3.1"]="6"
+    ["qwen2.5"]="6"
+    ["mistral0.3"]="6"
 )
 MODEL_TYPES=("llama3.1" "qwen2.5" "mistral0.3")
-QUANT_TYPES=("gptq" "smooth" "awq")
+QUANT_TYPES=("gptq" "smooth")
+#  "awq")
 
 function generate_log_name() {
     local model=$1
@@ -62,7 +63,7 @@ function run_genflow() {
         "llama3.1")
             case "$quant" in
                 "gptq")
-                    bash ./scripts/eval.sh /data2/share/llama3.1/llama-3.1-8B-Instruct-W8A8-gptq "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
+                    bash ./scripts/eval.sh /data2/share/llama3.1/llama-3.1-8B-Instruct-GPTQ-w4a16 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
                     ;;
                 "smooth")
                     bash ./scripts/eval.sh /data2/share/llama3.1/llama-3.1-8B-Instruct-W8A8-smooth0.8 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
@@ -75,20 +76,20 @@ function run_genflow() {
         "qwen2.5")
             case "$quant" in
                 "gptq")
-                    bash ./scripts/eval.sh /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-W8A8-gptq "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
+                    bash ./scripts/eval.sh /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-GPTQ-w4a16 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
                     ;;
                 "smooth")
                     bash ./scripts/eval.sh /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-W8A8-smooth0.8 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
                     ;;
                 "awq")
-                    bash ./scripts/eval.sh /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-awq-w4-g128-zp "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
+                    bash ./scripts/eval.sh /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-AWQ "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
                     ;;
             esac
             ;;
         "mistral0.3")
             case "$quant" in
                 "gptq")
-                    bash ./scripts/eval.sh /data2/share/mistral-7B/Mistral-7B-Instruct-v0.3-W8A8-gptq "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
+                    bash ./scripts/eval.sh /data2/share/mistral/Mistral-7B-Instruct-v0.3-GPTQ-w4a16 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
                     ;;
                 "smooth")
                     bash ./scripts/eval.sh /data2/share/mistral-7B/Mistral-7B-Instruct-v0.3-W8A8-smooth0.8 "$temp" "$quant" "$device" > "logs/${log_name}.log" 2>&1
@@ -113,12 +114,12 @@ TEMP=$1
 mkdir -p logs
 
 # Traverse all combinations
-for model in "${MODEL_TYPES[@]}"; do
-    for quant in "${QUANT_TYPES[@]}"; do
-        device=${MODEL_TO_DEVICE[$model]}
-        echo "Running with model: $model, quant: $quant, temp: $TEMP, device: $device"
-        run_genflow "$model" "$TEMP" "$quant"
-    done
-done
+# for model in "${MODEL_TYPES[@]}"; do
+#     for quant in "${QUANT_TYPES[@]}"; do
+#         device=${MODEL_TO_DEVICE[$model]}
+#         echo "Running with model: $model, quant: $quant, temp: $TEMP, device: $device"
+#         run_genflow "$model" "$TEMP" "$quant"
+#     done
+# done
 
-# run_genflow "llama3.1" 0 "gptq"
+run_genflow llama3.1 0 gptq 

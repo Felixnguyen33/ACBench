@@ -5,10 +5,10 @@ import os
 import re
 from tqdm import tqdm
 
-from benchtools.llm.localLLM import VllmLocalLLM, VllmOfflineModel
+from agentbench.llm.localLLM import VllmLocalLLM, VllmOfflineModel
 
-from benchtools.evaluator.graph_evaluator import t_eval_graph, t_eval_nodes
-from benchtools.prompts.eval_prompt import two_shot_example as example
+from agentbench.evaluator.graph_evaluator import t_eval_graph, t_eval_nodes
+from agentbench.prompts.eval_prompt import two_shot_example as example
 
 
 def workflow_to_node_list(workflow: str) -> List[str]:
@@ -106,10 +106,10 @@ def gen_workflow(
         temperature=args.temperature,
         top_p=args.top_p,
         max_tokens=args.max_tokens,
-        # quantization=args.quantization,
         dtype=args.dtype,
         device=args.device,
-        tensor_parallel_size=args.tensor_parallel_size
+        tensor_parallel_size=args.tensor_parallel_size,
+        block_size=16
     )
 
     with open(gold_path, "r") as f:
@@ -270,6 +270,7 @@ if __name__ == "__main__":
     parser.add_argument("--quantization", type=str, default=None)
     parser.add_argument("--dtype", type=str, default="fp16")
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--tensor_parallel_size", type=int, default=1)
+    parser.add_argument("--tensor_parallel_size", type=int, default=2)
+    parser.add_argument("--block_size", type=int, default=16)
     args = parser.parse_args()
     main(args)

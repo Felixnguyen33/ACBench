@@ -86,7 +86,7 @@ if __name__ == '__main__':
     setup(
         name='agentbench',
         version='0.1',
-        description='library for benchtools',
+        description='library for agentbench',
         long_description=readme(),
         long_description_content_type='text/markdown',
         keywords='computer vision, model compression',
