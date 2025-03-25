@@ -1,113 +1,104 @@
-<h1 align="center"> WorFBench </h1>
-<h3 align="center"> Benchmarking Agentic Workflow Generation </h3>
+<h1 align="center"> ACBench </h1>
+<h3 align="center"> Benchmarking Agentic Capabilities of Compressed LLMs </h3>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2410.07869">📄arXiv</a> •
-  <a href="https://huggingface.co/papers/2410.07869">🤗HFPaper</a> •
-  <a href="https://www.zjukg.org/project/WorFBench/">🌐Web</a> •
-  <a href="https://huggingface.co/collections/zjunlp/worfbench-66fc28b8ac1c8e2672192ea1">📊Dataset</a>
+  <a href="https://arxiv.org/abs/2403.xxxxx">📄arXiv</a> •
+  <a href="https://huggingface.co/papers/2403.xxxxx">🤗HFPaper</a> •
+  <a href="https://github.com/yourusername/ACBench">🌐GitHub</a> •
+  <a href="https://huggingface.co/datasets/yourusername/ACBench">📊Dataset</a>
 </p>
 
-[![Awesome](https://awesome.re/badge.svg)](https://github.com/zjunlp/WorFBench) 
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/yourusername/ACBench) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-![](https://img.shields.io/github/last-commit/zjunlp/WorFBench?color=green) 
+![](https://img.shields.io/github/last-commit/yourusername/ACBench?color=green) 
 
 ## Table of Contents
-- 🌻[Acknowledgement](#🌻acknowledgement)
-- 🌟[Overview](#🌟overview)
+- 🌻[Overview](#🌻overview)
 - 🔧[Installation](#🔧installation)
-- ✏️[Model-Inference](#✏️model-inference)
-- 📝[Workflow-Generation](#📝workflow-generation)
-- 🤔[Workflow-Evaluation](#🤔workflow-evaluation)
-<!-- - 🎉[Contributors](#🎉contributors) -->
+- 📊[Benchmark Structure](#📊benchmark-structure)
+- 🧪[Evaluation](#🧪evaluation)
+- 📈[Results](#📈results)
 
 ---
 
-## 🌻Acknowledgement
+## 🌻Overview
 
-Our code of training module is referenced and adapted from [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory). And the Dataset is collected from [ToolBench](https://github.com/openbmb/toolbench?tab=readme-ov-file), [ToolAlpaca](https://github.com/tangqiaoyu/ToolAlpaca), [Lumos](https://github.com/allenai/lumos?tab=readme-ov-file), [WikiHow](https://github.com/mahnazkoupaee/WikiHow-Dataset), [Seal-Tools](https://github.com/fairyshine/seal-tools), [Alfworld](https://github.com/alfworld/alfworld), [Webshop](https://github.com/princeton-nlp/WebShop), [IntercodeSql](https://github.com/princeton-nlp/intercode). Our end-to-end evaluation module is based on [IPR](https://github.com/WeiminXiong/IPR), [Stable ToolBench](https://github.com/THUNLP-MT/StableToolBench). Thanks for their great contributions!
+Post-training compression reduces the computational and memory costs of large language models (LLMs), enabling resource-efficient deployment. However, existing compression benchmarks focus narrowly on language modeling (e.g., perplexity) and natural language understanding tasks (e.g., GLUE accuracy), ignoring the agentic capabilities—workflow, tool use/function call, long-context understanding and real-world application.
 
+We introduce the Agent Compression Benchmark (ACBench), the first comprehensive benchmark for evaluating how compression impacts LLMs' agentic abilities. ACBench spans:
+- 12 tasks across 4 capabilities (e.g., WorfBench for workflow generation, Needle-in-Haystack for long-context retrieval)
+- 4-bit quantization (GPTQ, AWQ) and 50% pruning (Wanda, SparseGPT)
+- 15 models, including small (Gemma-2B), standard (Qwen2.5-7B), and distilled reasoning LLMs (DeepSeek-R1-Distill)
 
-## 🌟Overview
-
-Large Language Models (LLMs), with their exceptional ability to handle a wide range of tasks, have driven significant advancements in tackling reasoning and planning tasks, wherein decomposing complex problems into executable workflows is a crucial step in this process. Existing workflow evaluation frameworks either focus solely on holistic performance or suffer from limitations such as restricted scenario coverage, simplistic workflow structures, and lax evaluation standards. To this end, we introduce WorFBench, a unified workflow generation benchmark with multi-faceted scenarios and intricate graph workflow structures. Additionally, we present WorFEval, a systemic evaluation protocol utilizing subsequence and subgraph matching algorithms to accurately quantify the LLM agent's workflow generation capabilities. Through comprehensive evaluations across different types of LLMs, we discover distinct gaps between the sequence planning capabilities and graph planning capabilities of LLM agents, with even GPT-4 exhibiting a gap of around 15%. We also train two open-source models and evaluate their generalization abilities on held-out tasks. Furthermore, we observe that the generated workflows can enhance downstream tasks, enabling them to achieve superior performance with less time during inference. You can download our dataset from [huggingface](https://huggingface.co/collections/zjunlp/worfbench-66fc28b8ac1c8e2672192ea1)!
-
-
-
+Our experiments reveal compression tradeoffs: 4-bit quantization preserves workflow generation and tool use (1%--3% drop) but degrades real-world application accuracy by 10%--15%. We introduce ERank, Top-k Ranking Correlation and Energy to systematize analysis. ACBench provides actionable insights for optimizing LLM compression in agentic scenarios, bridging the gap between algorithmic efficiency and real-world applicability.
 
 ## 🔧Installation
 
 ```bash
-git clone https://github.com/zjunlp/WorFBench
-cd WorFBench
+git clone https://github.com/yourusername/ACBench
+cd ACBench
 pip install -r requirements.txt
 ```
 
+## 📊Benchmark Structure
 
+ACBench evaluates LLM compression across four key agentic capabilities:
 
-## ✏️Model-Inference
+1. **Workflow Generation**
+   - WorfBench tasks
+   - Complex planning scenarios
+   - Multi-step reasoning
 
-We use [llama-facotry](https://github.com/hiyouga/LLaMA-Factory) to deploy local model with OpenAI-style API
+2. **Tool Use & Function Calling**
+   - API interaction tasks
+   - Tool selection and execution
+   - Parameter handling
+
+3. **Long-Context Understanding**
+   - Needle-in-Haystack tasks
+   - Document analysis
+   - Context retrieval
+
+4. **Real-World Applications**
+   - Practical scenarios
+   - Domain-specific tasks
+   - Real-world problem solving
+
+## 🧪Evaluation
+
+ACBench supports evaluation of various compression methods:
+
 ```bash
-git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git
-cd LLaMA-Factory
-pip install -e ".[torch,metrics]"
-API_PORT=8000 llamafactory-cli api examples/inference/llama3_vllm.yaml
+# Evaluate 4-bit quantization
+python evaluate.py \
+    --model_name your_model \
+    --compression_method gptq \
+    --tasks workflow tool_use long_context real_world
+
+# Evaluate pruning
+python evaluate.py \
+    --model_name your_model \
+    --compression_method wanda \
+    --tasks workflow tool_use long_context real_world
 ```
 
+## 📈Results
 
+Our comprehensive evaluation reveals:
 
+1. **Quantization Impact**
+   - Workflow generation: 1-3% performance drop
+   - Tool use: Minimal degradation
+   - Real-world applications: 10-15% accuracy reduction
 
-## 📝Workflow-Generation
-Generate workflow with local llm api
-```bash
-tasks=(wikihow toolbench toolalpaca lumos alfworld webshop os)
-model_name=your_model_name
-for task in ${tasks[@]}; do
-    python node_eval.py \
-        --task gen_workflow \
-        --model_name ${model_name} \
-        --gold_path ./gold_traj/${task}/graph_eval.json \
-        --pred_path ./pred_traj/${task}/${model_name}/graph_eval_two_shot.json\
-        --task_type ${task} \
-        --few_shot \
+2. **Pruning Effects**
+   - Selective impact on different capabilities
+   - Trade-offs between efficiency and performance
 
-done
-```
+3. **Model-Specific Findings**
+   - Small models (Gemma-2B)
+   - Standard models (Qwen2.5-7B)
+   - Distilled models (DeepSeek-R1-Distill)
 
-## 🤔Workflow-Evaluation
-Evaluation the workflow in the mode of *node* or *graph*
-```bash
-tasks=(wikihow toolbench toolalpaca lumos alfworld webshop os)
-model_name=your_model_name
-for task in ${tasks[@]}; do
-    python node_eval.py \
-        --task eval_workflow \
-        --model_name ${model_name} \
-        --gold_path ./gold_traj/${task}/graph_eval.json \
-        --pred_path ./pred_traj/${task}/${model_name}/graph_eval_two_shot.json\
-        --eval_model all-mpnet-base-v2 \
-        --eval_output ./eval_result/${model_name}_${task}_graph_eval_two_shot.json \
-        --eval_type node \
-        --task_type ${task} \
-
-done
-```
-
-| Benchmark       | Description         |
-| --------------- | ------------------- |
-| KVCache-Factory | 大海捞针 + RULER     |
-| LongBenchv1     | 长文本测评           |
-| LongGenBench    | 长文本数学题         |
-| toolbench       | From T-eval         |
-| Agentbench      | WorfBench           |
-
-
-
-<!-- ## 🎉Contributors
-
-<a href="https://github.com/zjunlp/WorFBench/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=zjunlp/WorFBench" /></a>
-
-We will offer long-term maintenance to fix bugs and solve issues. So if you have any problems, please put issues to us. -->
+For detailed results and analysis, please refer to our paper.
 
