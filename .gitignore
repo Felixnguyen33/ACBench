@@ -20,3 +20,5 @@ qllm_eval/visualization/basic/assets/*
 qllm-eval/qllm_eval/visualization/trustworthiness/*
 
 *.model
+
+*.csv
