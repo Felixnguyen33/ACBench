@@ -8,3 +8,10 @@ agentbench.egg-info/*
 *.png
 *.jsonl
 thirdparty/KVCache-Factory/data/*
+*.pt 
+*.txt
+*.pid 
+
+qllm_eval/visualization/basic/results/
+qllm_eval/visualization/basic/assets/*
+qllm-eval/qllm_eval/visualization/trustworthiness/*
