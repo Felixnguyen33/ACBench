@@ -1,3 +1,6 @@
+*.safetensors
+agentbench/analysis/analyze_energy/combined_logits_imgs/combined_position_70.png
+
 *.out
 *.json
 *.pyc
@@ -15,3 +18,5 @@ thirdparty/KVCache-Factory/data/*
 qllm_eval/visualization/basic/results/
 qllm_eval/visualization/basic/assets/*
 qllm-eval/qllm_eval/visualization/trustworthiness/*
+
+*.model
