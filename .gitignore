@@ -7,3 +7,4 @@ __pycache__/*
 agentbench.egg-info/*
 *.png
 *.jsonl
+thirdparty/KVCache-Factory/data/*
