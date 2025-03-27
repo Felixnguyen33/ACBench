@@ -1,0 +1,38 @@
+base:
+    seed: &seed 42
+model:
+    type: Qwen2
+    # path: /data2/share/Qwen2.5/QwQ-32B-Preview
+    path: /data2/share/Qwen2.5/Qwen2.5-7B-Instruct
+    # type: InternLM2
+    # path: /data2/share/internlm/internlm2_5-7b-chat
+    # type: Mistral
+    # path: /data2/share/mistral/Mistral-7B-Instruct-v0.3
+    # type: Llama
+    # path: /data2/share/llama3.1/llama-3.1-8B-Instruct
+    torch_dtype: auto
+calib:
+    name: pileval
+    download: False
+    path: ./data/calib_data/pileval
+    n_samples: 128
+    bs: -1
+    seq_len: 512
+    preproc: general
+    seed: *seed
+eval:
+    eval_pos: [transformed]
+    name: wikitext2
+    download: False
+    path: ./data/eval_data/wikitext2
+    bs: 1
+    seq_len: 2048
+sparse:
+    method: Wanda
+    weight:
+        sparsity: 0.5
+    sparsity_out: False
+save:
+    save_fp: False
+    save_lightllm: False
+    save_path: /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-Wanda-0.5

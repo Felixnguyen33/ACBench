@@ -1,0 +1,46 @@
+base:
+    seed: &seed 42
+model:
+    type: Qwen2
+    path: /data2/share/Qwen2.5/QwQ-32B-Preview
+    # path: /data2/share/Qwen2.5/Qwen2.5-7B-Instruct
+    # type: InternLM2
+    # path: /data2/share/internlm/internlm2_5-7b-chat
+    tokenizer_mode: slow
+    torch_dtype: auto
+calib:
+    name: pileval
+    download: False
+    path: ./data/calib_data/pileval
+    n_samples: 128
+    bs: -1
+    seq_len: 512
+    preproc: general
+    seed: *seed
+# eval:
+#     eval_pos: [pretrain, transformed, fake_quant]
+#     name: wikitext2
+#     download: False
+#     path: ./data/eval_data/wikitext2
+#     seq_len: 2048
+#     # For 7B / 13B model eval, bs can be set to "1", and inference_per_block can be set to "False".
+#     # For 70B model eval, bs can be set to "20", and inference_per_block can be set to "True".
+#     bs: 1
+#     inference_per_block: False
+quant:
+    method: Awq
+    weight:
+        bit: 4
+        symmetric: True
+        granularity: per_group
+        group_size: 128
+        need_pack: True
+    special:
+        trans: True
+        trans_version: v2
+        weight_clip: True
+    quant_out: True
+save:
+    save_vllm: True
+    # save_path: /data2/share/internlm/internlm2_5-7b-chat-AWQ-W4-G128
+    save_path: /data2/share/Qwen2.5/QwQ-32B-Preview-AWQ-W4-G128

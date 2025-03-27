@@ -22,3 +22,5 @@ qllm-eval/qllm_eval/visualization/trustworthiness/*
 *.model
 
 *.csv
+llmc/data/*
+*.arrow

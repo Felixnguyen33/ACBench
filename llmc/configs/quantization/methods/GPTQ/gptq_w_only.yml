@@ -1,0 +1,44 @@
+base:
+    seed: &seed 0
+model:
+    type: Qwen2
+    path: /data2/share/Qwen2.5/Qwen2.5-7B-Instruct
+    torch_dtype: auto
+calib:
+    name: wikitext2
+    download: False
+    n_samples: 128
+    path: ./data/calib_data/wikitext2
+    bs: 1
+    seq_len: 2048
+    preproc: wikitext2_gptq
+    seed: *seed
+eval:
+    eval_pos: [fake_quant]
+    name: wikitext2
+    download: False
+    path: ./data/eval_data/wikitext2
+    bs: 1
+    seq_len: 2048
+    inference_per_block: False
+    eval_token_consist: True
+quant:
+    method: GPTQ
+    weight:
+        bit: 4
+        symmetric: True
+        granularity: per_group
+        group_size: 128
+        # calib_algo: mse
+        # mse_b_num: 2
+    special:
+        actorder: True
+        static_groups: True
+        percdamp: 0.01
+        blocksize: 128
+        true_sequential: True
+    quant_out: True
+save:
+    save_fake: False
+    save_vllm: True
+    save_path: /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-GPTQ-W4-G128
