@@ -8,7 +8,6 @@ __pycache__/*
 *.log
 *.npy
 agentbench.egg-info/*
-*.png
 *.jsonl
 thirdparty/KVCache-Factory/data/*
 *.pt 
