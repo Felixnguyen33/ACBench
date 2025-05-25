@@ -203,7 +203,7 @@ llm:
 
   Qwen2.5-7B-Instruct-Mag-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/magnitude/qwen-2.5-7b-chat-magnitude-un0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/unstructured/magnitude/qwen-2.5-7b-chat-magnitude-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -215,7 +215,7 @@ llm:
 
   Qwen2.5-7B-Instruct-Mag-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/magnitude/qwen-2.5-7b-chat-magnitude-2-4-0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/2-4/magnitude/qwen-2.5-7b-chat-magnitude-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -227,7 +227,7 @@ llm:
 
   Qwen2.5-7B-Instruct-Wanda-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -239,7 +239,7 @@ llm:
 
   Qwen2.5-7B-Instruct-Wanda-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -251,7 +251,7 @@ llm:
 
   Qwen2.5-7B-Instruct-SparseGPT-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/sparsegpt/qwen-2.5-7b-chat-sparsegpt-un0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/unstructured/sparsegpt/qwen-2.5-7b-chat-sparsegpt-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -263,7 +263,7 @@ llm:
 
   Qwen2.5-7B-Instruct-SparseGPT-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/sparsegpt/qwen-2.5-7b-chat-sparsegpt-2-4-0.5
+      engine: /path/to/out_pruned_llm/qwen_7b/2-4/sparsegpt/qwen-2.5-7b-chat-sparsegpt-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -287,7 +287,7 @@ llm:
 
   InternLM2.5-7B-Instruct-Mag-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/unstructured/magnitude/internlm-2.5-7b-chat-magnitude-un0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/unstructured/magnitude/internlm-2.5-7b-chat-magnitude-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -299,7 +299,7 @@ llm:
 
   InternLM2.5-7B-Instruct-Mag-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/2-4/magnitude/internlm-2.5-7b-chat-magnitude-2-4-0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/2-4/magnitude/internlm-2.5-7b-chat-magnitude-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -311,7 +311,7 @@ llm:
 
   InternLM2.5-7B-Instruct-Wanda-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/unstructured/wanda/internlm-2.5-7b-chat-wanda-un0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/unstructured/wanda/internlm-2.5-7b-chat-wanda-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -323,7 +323,7 @@ llm:
 
   InternLM2.5-7B-Instruct-Wanda-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/2-4/wanda/internlm-2.5-7b-chat-wanda-2-4-0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/2-4/wanda/internlm-2.5-7b-chat-wanda-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -335,7 +335,7 @@ llm:
 
   InternLM2.5-7B-Instruct-SparseGPT-Un-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/unstructured/sparsegpt/internlm-2.5-7b-chat-sparsegpt-un0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/unstructured/sparsegpt/internlm-2.5-7b-chat-sparsegpt-un0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1
@@ -347,7 +347,7 @@ llm:
 
   InternLM2.5-7B-Instruct-SparseGPT-2-4-0.5:
       name: vllm
-      engine: /mnt/sdd/dongpeijie/out_pruned_llm/internlm_7b/2-4/sparsegpt/internlm-2.5-7b-chat-sparsegpt-2-4-0.5
+      engine: /path/to/out_pruned_llm/internlm_7b/2-4/sparsegpt/internlm-2.5-7b-chat-sparsegpt-2-4-0.5
       max_tokens: 100
       temperature: 0.
       top_p: 1

@@ -4,9 +4,9 @@ MODEL=$1
 TEMP=$2
 QUANT=$3
 
-# DEVICE=${4:-6}
+DEVICE=${4:-6}
 
-# export CUDA_VISIBLE_DEVICES=$DEVICE
+export CUDA_VISIBLE_DEVICES=$DEVICE
 
 tasks=(wikihow toolbench toolalpaca lumos alfworld webshop os)
 

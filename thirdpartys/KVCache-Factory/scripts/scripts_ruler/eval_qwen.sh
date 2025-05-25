@@ -33,7 +33,7 @@ python3 run_ruler.py \
 ) 2>&1 | tee results_ruler/logs/Qwen2.5_7b_AWQ_${METHOD}_${MAX_CAPACITY_PROMPT}.log
 
 # Define root directory
-root_dir=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b
+root_dir=/path/to/out_pruned_llm/qwen_7b
 
 # For Qwen2.5-7B pruned models
 for prune_method in magnitude wanda sparsegpt; do

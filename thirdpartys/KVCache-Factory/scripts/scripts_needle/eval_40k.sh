@@ -76,7 +76,7 @@ python -u run_needle_in_haystack.py --s_len 1000 --e_len 40001 \
 
 
 # # Define root directory
-# root_dir=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b
+# root_dir=/path/to/out_pruned_llm/qwen_7b
 
 # # For Qwen2.5-7B-mag-un-0.5
 # (

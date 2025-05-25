@@ -104,8 +104,8 @@ def compare_logits(base_model_path, compressed_model_path, compression_name):
 
 # Paths
 BASE_MODEL = "/data2/share/Qwen2.5/Qwen2.5-7B-Instruct"
-WANDA_24_MODEL = "/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5"
-WANDA_UNSTRUCTURED_MODEL = "/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5"
+WANDA_24_MODEL = "/path/to/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5"
+WANDA_UNSTRUCTURED_MODEL = "/path/to/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5"
 GPTQ_MODEL = "/data2/share/Qwen2.5/Qwen2.5-7B-Instruct-GPTQ-w4a16"
 
 # Generate comparison plots
@@ -135,19 +135,3 @@ compare_logits(BASE_MODEL, GPTQ_MODEL, "GPTQ-INT4")
 #     num_calibration_samples=128,
 #     apply_quant=False,
 # )
-
-
-# uncompressed model 
-# /data2/share/Qwen2.5/Qwen2.5-7B-Instruct
-
-
-# 2:4-wanda
-# /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5
-
-
-# unstructured-wanda
-# /mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5
-
-
-# gptq-int4 
-# /data2/share/Qwen2.5/Qwen2.5-7B-Instruct-GPTQ-w4a16

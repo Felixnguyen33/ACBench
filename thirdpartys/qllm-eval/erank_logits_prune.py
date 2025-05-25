@@ -16,8 +16,8 @@ from datasets import load_dataset
 COLOR_PALETTE = ['#8ECFC9', '#FFBE7A', '#FA7F6F', '#82B0D2', '#BEB8DC', '#E7DAD2', '#999999']
 
 candidate_model_dict = {
-    "qwen-2-4-wanda": "/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5",
-    "qwen-un-wanda": "/mnt/sdd/dongpeijie/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5",
+    "qwen-2-4-wanda": "/path/to/out_pruned_llm/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5",
+    "qwen-un-wanda": "/path/to/out_pruned_llm/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5",
 }
 
 parser = argparse.ArgumentParser()

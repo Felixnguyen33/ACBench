@@ -4,7 +4,7 @@ from vllm import LLM, SamplingParams
 import argparse
 
 parser = argparse.ArgumentParser(description='Inference with VLLM')
-parser.add_argument('--model_path', type=str, default='/mnt/sdb/dongpeijie/workspace/AgentBench/thirdparty/llmc/save/awq_w4a16/vllm_quant_model', help='Path to the model')
+parser.add_argument('--model_path', type=str, default='/path/to/workspace/AgentBench/thirdparty/llmc/save/awq_w4a16/vllm_quant_model', help='Path to the model')
 args = parser.parse_args()
 
 model_path = args.model_path

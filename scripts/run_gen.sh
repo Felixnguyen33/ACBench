@@ -114,12 +114,10 @@ TEMP=$1
 mkdir -p logs
 
 # Traverse all combinations
-# for model in "${MODEL_TYPES[@]}"; do
-#     for quant in "${QUANT_TYPES[@]}"; do
-#         device=${MODEL_TO_DEVICE[$model]}
-#         echo "Running with model: $model, quant: $quant, temp: $TEMP, device: $device"
-#         run_genflow "$model" "$TEMP" "$quant"
-#     done
-# done
-
-run_genflow llama3.1 0 gptq 
+for model in "${MODEL_TYPES[@]}"; do
+    for quant in "${QUANT_TYPES[@]}"; do
+        device=${MODEL_TO_DEVICE[$model]}
+        echo "Running with model: $model, quant: $quant, temp: $TEMP, device: $device"
+        run_genflow "$model" "$TEMP" "$quant"
+    done
+done

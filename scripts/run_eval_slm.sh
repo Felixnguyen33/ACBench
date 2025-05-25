@@ -80,62 +80,6 @@ function generate_log_name() {
     echo "EVAL-${model}-${prune}-t${temp}-${current_date}"
 }
 
-# function run_eval() {
-#     local model=$1
-#     local temp=$2  
-#     local prune=$3
-#     local device=${MODEL_TO_DEVICE[$model]}
-#     local log_name=$(generate_log_name "$model" "$prune" "$temp")
-
-#     echo "Generating with log name: $log_name"
-
-#     case "$model" in
-#         "internlm2.5")
-#             case "$prune" in
-#                 "magnitude-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/magnitude/internlm-2.5-7b-chat-magnitude-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "sparsegpt-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/sparsegpt/internlm-2.5-7b-chat-sparsegpt-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "wanda-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/2-4/wanda/internlm-2.5-7b-chat-wanda-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "magnitude-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/magnitude/internlm-2.5-7b-chat-magnitude-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "sparsegpt-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/sparsegpt/internlm-2.5-7b-chat-sparsegpt-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "wanda-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/internlm_7b/unstructured/wanda/internlm-2.5-7b-chat-wanda-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#             esac
-#             ;;
-#         "qwen2.5")
-#             case "$prune" in
-#                 "magnitude-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/magnitude/qwen-2.5-7b-chat-magnitude-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "sparsegpt-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/sparsegpt/qwen-2.5-7b-chat-sparsegpt-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "wanda-2-4")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/2-4/wanda/qwen-2.5-7b-chat-wanda-2-4-0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "magnitude-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/magnitude/qwen-2.5-7b-chat-magnitude-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "sparsegpt-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/sparsegpt/qwen-2.5-7b-chat-sparsegpt-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#                 "wanda-un")
-#                     bash ./scripts/eval.sh /data2/share/peijiedong/AgentBench/thirdparty/wanda/out/qwen_7b/unstructured/wanda/qwen-2.5-7b-chat-wanda-un0.5 "$temp" "$prune" "$device" > "logs/${log_name}.log" 2>&1
-#                     ;;
-#             esac
-#             ;;
-#     esac
-# }
 
 function generate_slm_log_name() {
     local model=$1
@@ -166,15 +110,6 @@ TEMP=$1
 
 # Create logs directory if it doesn't exist
 mkdir -p logs
-
-# # Traverse all combinations
-# for model in "${MODEL_TYPES[@]}"; do
-#     for prune in "${PRUNE_TYPES[@]}"; do
-#         device=${MODEL_TO_DEVICE[$model]}
-#         echo "Running with model: $model, prune: $prune, temp: $TEMP, device: $device"
-#         run_eval "$model" "$TEMP" "$prune" "$device"
-#     done
-# done
 
 # Run evaluation for all SLM models
 for model_key in "${!SLM_MODELS[@]}"; do

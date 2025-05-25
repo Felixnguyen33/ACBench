@@ -77,7 +77,7 @@
 
 # QWEN 2.5 14B
 # # 2-4 magnitude
-# MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/2-4/magnitude/qwen-2.5-14b-instruct-magnitude-2-4-0.5
+# MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/2-4/magnitude/qwen-2.5-14b-instruct-magnitude-2-4-0.5
 # TYPE=vllm
 # PRUNE_TYPE=mag_2-4
 # EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm
@@ -85,7 +85,7 @@
 # CUDA_VISIBLE_DEVICES=6 bash test_all_en.sh $TYPE $MODEL_NAME_OR_PATH $EXP_NAME $META_TEMPLATE $PRUNE_TYPE &
 
 # un magnitude
-MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/unstructured/magnitude/qwen-2.5-14b-instruct-magnitude-un0.5
+MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/unstructured/magnitude/qwen-2.5-14b-instruct-magnitude-un0.5
 TYPE=vllm
 PRUNE_TYPE=mag_un
 EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm
@@ -93,7 +93,7 @@ META_TEMPLATE=qwen
 CUDA_VISIBLE_DEVICES=5 bash test_all_en.sh $TYPE $MODEL_NAME_OR_PATH $EXP_NAME $META_TEMPLATE $PRUNE_TYPE &
 
 # 2-4 sparsegpt
-MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/2-4/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-2-4-0.5
+MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/2-4/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-2-4-0.5
 TYPE=vllm
 PRUNE_TYPE=sparsegpt_2-4
 EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm
@@ -101,7 +101,7 @@ META_TEMPLATE=qwen
 CUDA_VISIBLE_DEVICES=1 bash test_all_en.sh $TYPE $MODEL_NAME_OR_PATH $EXP_NAME $META_TEMPLATE $PRUNE_TYPE &
 
 # un sparsegpt
-MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/unstructured/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-un0.5
+MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/unstructured/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-un0.5
 TYPE=vllm
 PRUNE_TYPE=sparsegpt_un
 EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm
@@ -109,7 +109,7 @@ META_TEMPLATE=qwen
 CUDA_VISIBLE_DEVICES=2 bash test_all_en.sh $TYPE $MODEL_NAME_OR_PATH $EXP_NAME $META_TEMPLATE $PRUNE_TYPE &
 
 # 2-4 wanda
-MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/2-4/wanda/qwen-2.5-14b-instruct-wanda-2-4-0.5
+MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/2-4/wanda/qwen-2.5-14b-instruct-wanda-2-4-0.5
 TYPE=vllm
 PRUNE_TYPE=wanda_2-4
 EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm
@@ -118,7 +118,7 @@ CUDA_VISIBLE_DEVICES=3 bash test_all_en.sh $TYPE $MODEL_NAME_OR_PATH $EXP_NAME $
 
 
 # un sparsegpt
-MODEL_NAME_OR_PATH=/mnt/sdd/dongpeijie/out_pruned_llm/qwen_14b/unstructured/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-un0.5
+MODEL_NAME_OR_PATH=/path/to/out_pruned_llm/qwen_14b/unstructured/sparsegpt/qwen-2.5-14b-instruct-sparsegpt-un0.5
 TYPE=vllm
 PRUNE_TYPE=sparsegpt_un
 EXP_NAME=qwen2.5-14b_${PRUNE_TYPE}_en_vllm

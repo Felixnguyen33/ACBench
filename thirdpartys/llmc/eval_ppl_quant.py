@@ -14,8 +14,8 @@ def get_wikitext2(nsamples, seed, seqlen, tokenizer):
     # Load train and test datasets
     # traindata = load_dataset('wikitext', 'wikitext-2-raw-v1', split='train')
     # testdata = load_dataset('wikitext', 'wikitext-2-raw-v1', split='test')
-    traindata = load_from_disk('/mnt/sdb/dongpeijie/workspace/Pruner-Zero/data/wikitext2_train')
-    testdata = load_from_disk('/mnt/sdb/dongpeijie/workspace/Pruenr-Zero/data/wikitext2_test')
+    traindata = load_from_disk('/path/to/workspace/Pruner-Zero/data/wikitext2_train')
+    testdata = load_from_disk('/path/to/workspace/Pruenr-Zero/data/wikitext2_test')
 
     # Encode datasets
     trainenc = tokenizer(" ".join(traindata['text']), return_tensors='pt')
