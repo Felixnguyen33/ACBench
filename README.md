@@ -8,7 +8,7 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://github.com/pprp/ACBench) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-![](https://img.shields.io/github/last-commit/pprp/ACBench?color=green) 
+
 
 ## Table of Contents
 
@@ -18,7 +18,6 @@
 - [Evaluation](#evaluation)
 - [Citation](#citation)
 
----
 
 ## Abstract 
 
@@ -101,7 +100,7 @@ For Compression:
 - QLLM-Eval: Evaluating Quantized Large Language Models [![arXiv](https://img.shields.io/badge/arXiv-2402.18158-b31b1b.svg)](https://arxiv.org/abs/2402.18158) [![GitHub](https://img.shields.io/github/stars/thu-nics/qllm-eval?style=social)](https://github.com/thu-nics/qllm-eval)
 
 
-For fast serving, we employ [![Github](https://img.shields.io/github.stars/vllm-project/vllm?style=social)](https://github.com/vllm-project/vllm) for evaluation. 
+For fast serving, we employ [![Github](https://img.shields.io/github/stars/vllm-project/vllm?style=social)](https://github.com/vllm-project/vllm) for evaluation. 
 
 ## Citation
 
