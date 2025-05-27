@@ -2,7 +2,7 @@
 <h3 align="center">🤔 Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compression 📊</h3>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2505.xxxxx">📄arXiv</a> •
+  <a href="https://arxiv.org/abs/2505.19433">📄arXiv</a> •
   <a href="https://github.com/pprp/ACBench">🌐GitHub</a>
 </p>
 
