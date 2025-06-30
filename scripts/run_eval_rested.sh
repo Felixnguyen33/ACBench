@@ -83,7 +83,7 @@ function run_slm_EVALFLOW() {
         eval_output_file="./data/eval_result/${model_name}/${model_name}_${task}_graph_eval_two_shot.json"
         if [ ! -f "$eval_output_file" ]; then
             echo "Running evaluation for task $task as output not found"
-            python agentbench/node_eval.py \
+            python acbench/node_eval.py \
                 --task eval_workflow \
                 --model_name ${model_path} \
                 --gold_path ./data/gold_traj/${task}/graph_eval.json \

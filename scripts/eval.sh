@@ -12,7 +12,7 @@ tasks=(os wikihow toolbench toolalpaca lumos alfworld webshop)
 MODEL_NAME=$(basename $MODEL)
 
 for task in ${tasks[@]}; do
-    python agentbench/node_eval.py \
+    python acbench/node_eval.py \
         --task eval_workflow \
         --model_name ${MODEL} \
         --gold_path ./data/gold_traj/${task}/graph_eval.json \
