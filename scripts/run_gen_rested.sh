@@ -64,7 +64,7 @@ function run_slm_genflow() {
         result_file="./data/pred_traj/${model_name}/${task}/${model_name}/graph_eval_two_shot.json"
         if [ ! -f "$result_file" ]; then
             echo "Running task $task for model $model_key as result not found"
-            python agentbench/node_eval.py \
+            python acbench/node_eval.py \
                 --task gen_workflow \
                 --model_name ${model_path} \
                 --gold_path ./data/gold_traj/${task}/graph_eval.json \
