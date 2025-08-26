@@ -2,6 +2,7 @@ import requests
 import json
 from retry import retry
 import os
+import torch
 from vllm import LLM, SamplingParams
 from typing import List, Dict, Union
 
@@ -78,6 +79,11 @@ class VllmOfflineModel:
             device (str): Device to run the model on
             tensor_parallel_size (int): Size of tensor parallelism
         """
+        # Clear GPU memory before initialization
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            print(f"Cleared GPU memory. Available: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        
         self.model_path = model_path
         self.temperature = temperature
         self.top_p = top_p
@@ -96,7 +102,16 @@ class VllmOfflineModel:
         # if self.quantization == "neuron_quant":
         #     self._set_neuron_environment()
         
-        self.llm = self._create_llm()
+        try:
+            self.llm = self._create_llm()
+        except RuntimeError as e:
+            if "out of memory" in str(e).lower():
+                print("CUDA out of memory error. Trying with reduced memory settings...")
+                # Try with even more conservative settings
+                self._create_llm_with_reduced_memory()
+            else:
+                raise e
+        
         self.sampling_params = SamplingParams(
             temperature=self.temperature,
             top_p=self.top_p,
@@ -116,11 +131,32 @@ class VllmOfflineModel:
         return LLM(
             model=self.model_path,
             trust_remote_code=True,
-            # max_num_seqs=1,
-            # max_model_len=2048,
-            device=self.device,
+            max_num_seqs=1,
+            max_model_len=8192,  # Increased to handle very long prompts
             # quantization=self.quantization,
-            tensor_parallel_size=self.tensor_parallel_size
+            tensor_parallel_size=self.tensor_parallel_size,
+            gpu_memory_utilization=0.7,  # Further reduced from 0.9
+            max_num_batched_tokens=1024,  # Further reduced from 2048
+            dtype="auto",  # Let vLLM choose optimal dtype
+            swap_space=4,  # Add swap space for memory management
+            enforce_eager=True,  # Use eager mode to reduce memory usage
+        )
+
+    def _create_llm_with_reduced_memory(self) -> LLM:
+        """Creates and returns an LLM instance with minimal memory usage."""
+        print("Creating LLM with minimal memory settings...")
+        return LLM(
+            model=self.model_path,
+            trust_remote_code=True,
+            max_num_seqs=1,
+            max_model_len=4096,  # Increased to handle longer prompts
+            tensor_parallel_size=self.tensor_parallel_size,
+            gpu_memory_utilization=0.5,  # Very conservative
+            max_num_batched_tokens=512,  # Very conservative
+            dtype="fp16",  # Use fp16 to save memory
+            swap_space=8,  # More swap space
+            enforce_eager=True,
+            disable_log_stats=True,  # Disable logging to save memory
         )
 
     def _prepare_prompt(self, messages: List[Dict[str, str]]) -> str:
@@ -135,6 +171,34 @@ class VllmOfflineModel:
         """
         return "\n".join([f"{msg['role']}: {msg['content']}" for msg in messages])
 
+    def _estimate_prompt_length(self, messages: List[Dict[str, str]]) -> int:
+        """
+        Estimates the token length of the prompt.
+        
+        Args:
+            messages (List[Dict[str, str]]): List of message dictionaries
+            
+        Returns:
+            int: Estimated token length
+        """
+        prompt = self._prepare_prompt(messages)
+        # Rough estimation: 1 token ≈ 4 characters for English text
+        return len(prompt) // 4
+
+    def _adjust_model_len_if_needed(self, messages: List[Dict[str, str]]) -> None:
+        """
+        Dynamically adjusts max_model_len if the prompt is too long.
+        
+        Args:
+            messages (List[Dict[str, str]]): List of message dictionaries
+        """
+        estimated_length = self._estimate_prompt_length(messages)
+        current_max_len = self.llm.llm_engine.model_config.max_model_len
+        
+        if estimated_length > current_max_len:
+            print(f"Warning: Estimated prompt length ({estimated_length}) exceeds current max_model_len ({current_max_len})")
+            print("This might cause issues. Consider increasing max_model_len in the configuration.")
+
     def generate(self, messages: List[Dict[str, str]]) -> Union[str, Dict[str, str]]:
         """
         Generates a response based on the input messages.
@@ -145,6 +209,9 @@ class VllmOfflineModel:
         Returns:
             Union[str, Dict[str, str]]: Generated response or error message
         """
+        # Check if prompt length might be an issue
+        self._adjust_model_len_if_needed(messages)
+        
         prompt = self._prepare_prompt(messages)
         outputs = self.llm.generate([prompt], self.sampling_params)
 

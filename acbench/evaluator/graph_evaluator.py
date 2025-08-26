@@ -57,6 +57,11 @@ def match_node(pred_nodes:List[str],gt_nodes:List[str],sentence_model:object,mat
 
     len_pred = len(pred_nodes)
     len_gt = len(gt_nodes)
+    
+    # Handle empty cases
+    if len_pred == 0 or len_gt == 0:
+        return {}
+    
     bert_score_matrix = np.zeros((len_pred, len_gt))
     # bert_model = eval_model
     # sentence_model = SentenceTransformer(bert_model)
@@ -141,13 +146,35 @@ def t_eval_graph(pred_graph:Dict[str,List[str]],gt_graph:Dict[str,List[str]],sen
 
 
 def t_eval_nodes(pred_graph:Dict[str,List[str]],gt_graph:Dict[str,List[str]],sentence_model:object)-> Dict[str,float]:
+    # Handle empty or invalid graphs
+    if not pred_graph or not gt_graph or "nodes" not in pred_graph or "nodes" not in gt_graph:
+        return {
+            'precision': 0.0,
+            'recall': 0.0,
+            'f1_score': 0.0
+        }
+    
     try:
         all_gold_trajects = all_topological_sorts(gt_graph)
     except Exception as e:
-        
-        print(e,gt_graph)
+        print(f"Error in topological sort: {e}")
+        print(f"gt_graph: {gt_graph}")
+        return {
+            'precision': 0.0,
+            'recall': 0.0,
+            'f1_score': 0.0
+        }
 
     pred_nodes = [pred_node for pred_node in pred_graph["nodes"] if pred_node not in ["START","END"]]
+    
+    # Handle empty pred_nodes
+    if not pred_nodes:
+        return {
+            'precision': 0.0,
+            'recall': 0.0,
+            'f1_score': 0.0
+        }
+    
     max_f1 = {
         'precision': 0,
         'recall': 0,
@@ -169,7 +196,23 @@ def t_eval_plan(pred_plan:List[str],gt_plan:List[str], eval_model:object,order:b
         Secondly, use Hungarian matching to match the points;
         Finally, use LIS to calculate the number of matched nodes.
     """
+    # Handle empty cases
+    if len(pred_plan) == 0 or len(gt_plan) == 0:
+        return {
+            'precision': 0.0,
+            'recall': 0.0,
+            'f1_score': 0.0
+        }
+    
     pred_to_gt_mapping = match_node(pred_plan,gt_plan,eval_model)
+
+    # Handle empty mapping case
+    if not pred_to_gt_mapping:
+        return {
+            'precision': 0.0,
+            'recall': 0.0,
+            'f1_score': 0.0
+        }
 
     # print(f"pred_to_gt_mapping:{pred_to_gt_mapping}")
     len_pred = len(pred_plan)

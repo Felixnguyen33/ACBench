@@ -107,9 +107,7 @@ def gen_workflow(
         top_p=args.top_p,
         max_tokens=args.max_tokens,
         dtype=args.dtype,
-        device=args.device,
         tensor_parallel_size=args.tensor_parallel_size,
-        block_size=16,
     )
 
     with open(gold_path, "r") as f:
